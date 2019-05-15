@@ -1,19 +1,20 @@
 [markdown test](https://github.com/fuller-kport/GitTraining/blob/master/MARKDOWN_TEST.md)
 
 # 高専生による高専生のためのGit入門
-~~薄いGit本~~
 
-Gitって何? から Gitを使えるようになるまで
+みんな Gitは入れたな!!
+高専生なら丸太のように頼りになるGitを入れよう
 
-1. [Git is 何?](https://google.com)
-1. [install する](https://google.com)
+Gitって何? とりま入れてから考えません?
+
+### Gitをinstall
+if ( パッケージ管理ツール分かる ){
+}
 
 
-### Gitのインストール
-#### パッケージ管理ソフトを入れる
-#### Gitのインストールと初期設定
+if( インストールしてある && 使い方がわからない ){
+}
 
-### レポート(仮)をGitで管理してみる
 
 
 ## 資料
