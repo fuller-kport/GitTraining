@@ -2,21 +2,22 @@
 
 # 高専生による高専生のためのGit入門
 
-みんな Gitは入れたな!!
-高専生なら丸太のように頼りになるGitを入れよう
+高専生ならGitを使おう!!
 
-Gitって何? とりま入れてから考えません?
+Gitって何? って人は 何も考えずにまずは入れてみよう!
 
-### Gitをinstall
-if ( パッケージ管理ツール分かる ){
-}
+### Gitのinstall
+#### パッケージ管理ツールのinstall
+- [MacOsの人: brewをinstall](https://google.com)
+- [Linuxの人: 分かるでしょ! 後回し](https://google.com)
+- [Winなんとかの人: がんばってね](https://google.com)
+#### GitのInstall
+- [Gitをinstall](https://google.com)
 
 
-if( インストールしてある && 使い方がわからない ){
-}
-
-
+### Git
 
 ## 資料
 ### よく使うGitコマンド
 ### 逆引きGitコマンド
+### proxyを爆発させる方法
