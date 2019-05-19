@@ -7,12 +7,11 @@
 ---
 ## Gitのinstall
 #### 1. パッケージ管理ツールのinstall
-phttps://github.com/fuller-kport/GitTraining
-- [MacOsの人: brewをinstall](https://github.com/fuller-kport/GitTraining/resource/pages/how_to_install/brew.md)
+- [MacOsの人: brewをinstall](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/how_to_install/brew.md)
 - [Linuxの人: 分かるでしょ! 後回し](https://google.com)
 - [Winなんとかの人: がんばって](https://google.com)
 #### 2. GitのInstallと初期設定
-- [MacOs or Linuxの人](https://github.com/fuller-kport/GitTraining/resource/pages/how_to_install/git.md)
+- [MacOs or Linuxの人](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/how_to_install/git.md)
 - [Winなんとかの人: がんばって](https://google.com)
 ---
 ## Gitの基礎
