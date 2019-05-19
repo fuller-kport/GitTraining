@@ -1,19 +1,18 @@
 [markdown test](https://github.com/fuller-kport/GitTraining/blob/master/MARKDOWN_TEST.md)
 
 # 高専生のためのGit,GitHub入門
+上から順にGitHubの基礎まで進めてなんとなくGtiを使えるようにする
 
-高専生ならGitを使おう!!
-
-Gitって何? って人は 何も考えずにまずはinstall!
 
 ---
 ## Gitのinstall
 #### 1. パッケージ管理ツールのinstall
-- [MacOsの人: brewをinstall](https://google.com)
+phttps://github.com/fuller-kport/GitTraining
+- [MacOsの人: brewをinstall](https://github.com/fuller-kport/GitTraining/resource/pages/how_to_install/brew.md)
 - [Linuxの人: 分かるでしょ! 後回し](https://google.com)
 - [Winなんとかの人: がんばって](https://google.com)
 #### 2. GitのInstallと初期設定
-- [MacOs or Linuxの人](https://google.com)
+- [MacOs or Linuxの人](https://github.com/fuller-kport/GitTraining/resource/pages/how_to_install/git.md)
 - [Winなんとかの人: がんばって](https://google.com)
 ---
 ## Gitの基礎
