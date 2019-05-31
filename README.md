@@ -7,6 +7,9 @@ Gitを使えば右の様な汚いファイルも…  　左の様に綺麗に!! 
 
 ![効果はファイル汚れによります](https://github.com/fuller-kport/GitTraining/blob/master/resource/images/bad_good_samp.png)
 
+![効果はファイル汚れによります](https://github.com/fuller-kport/GitTraining/blob/master/resource/images/good.png)
+![効果はファイル汚れによります](https://github.com/fuller-kport/GitTraining/blob/master/resource/images/good.png)
+
 
 Git使えない系高専生: 「凄い!! Gitだけでこんなに!!」  
 Git使えない系高専生: 「でも…　難しいんでしょう… ?」  
