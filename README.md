@@ -4,19 +4,17 @@
 GitTrainingは~~完全無農薬，有機栽培~~のGitチュートリアルです!
 
 Gitを使えば右の様な汚いファイルも…  　左の様に綺麗に!! (効果はファイル汚れによります)
+
 ![効果はファイル汚れによります](https://github.com/fuller-kport/GitTraining/blob/master/resource/images/bad_good_samp.png)
 
 
 Git使えない系高専生: 「凄い!! Gitだけでこんなに!!」
-
 Git使えない系高専生: 「でも…　難しいんでしょう… ?」
 
-そんな事ありません!
+そんな事ありません!!
 
 上から順に進めていけば 誰でも簡単に「Gitゆうていける」状態に!
-
 今ならGitだけでなく GitHub! GitHubのチュートリアルまでついてきます!!
-
 さぁ! 是非あなたも分散型バージョン管理システム Git, GitHub を手に入れて快適な高専生活を!
 
 
