@@ -19,9 +19,8 @@ Git使えない系高専生: 「でも…　難しいんでしょう… ?」
 今ならGitだけでなく GitHub! GitHubのチュートリアルまでついてきます!!  
 さぁ! 是非あなたも分散型バージョン管理システム Git, GitHub を手に入れて快適な高専生活を!  
 
-
-
-##予備知識
+---
+## 予備知識
 windows非対応
 - [ターミナル，ディレクトリ，UNIX Command](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/unix_command.md)
 
