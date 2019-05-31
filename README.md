@@ -3,11 +3,12 @@
 # 高専生のためのGit,GitHub入門
 GitTrainingは ~~完全無農薬，有機栽培の~~ Gitチュートリアルです!
 
+Gitを使えば左の様な汚いファイルも…
 
 ![効果はファイル汚れによります](https://github.com/fuller-kport/GitTraining/blob/master/resource/images/bad.png)
-Gitを使えば右の様な汚いファイルも…  　左の様に綺麗に!! (効果はファイル汚れによります)  
 ![効果はファイル汚れによります](https://github.com/fuller-kport/GitTraining/blob/master/resource/images/good.png)
 
+右の様に綺麗に!! (効果はファイル汚れによります)  
 
 Git使えない系高専生: 「凄い!! Gitだけでこんなに!!」  
 Git使えない系高専生: 「でも…　難しいんでしょう… ?」  
