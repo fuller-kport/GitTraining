@@ -13,5 +13,13 @@ homebrewはパッケージ管理ソフトです．
 
 ## homebrewのinstall
 
-[homebrewのサイト](https://brew.sh/index_ja.html)から
+んじゃ早速インストール…
+
+[homebrewのサイト](https://brew.sh/index_ja.html)にでっかく「インストール」って書かれていて，
+その下にこんな文字列があるはずです．
+
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
 
