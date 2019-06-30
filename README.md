@@ -34,14 +34,14 @@ windows非対応
 - [Winなんとかの人: がんばって](https://google.com)
 ---
 ## Gitの基礎
-1. [Git is 何?](https://google.com)
-1. [最低限覚えるコマンド](https://google.com)
-1. [手を動かして覚える](https://google.com)
+1. [Git is 何?](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/what_is_git.md)
+1. [Gitの用語達](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/words_for_git.md)
+1. [実践Git]()
 ---
 ## GitHubの基礎
 1. [GitHub is 何?](https://google.com)
-1. [最低限覚えるコマンド](https://google.com)
-1. [手を動かして覚える](https://google.com)
+1. [GitHubの用語達](https://google.com)
+1. [実践GitHub](https://google.com)
 
 ---
 ## ここまで完全に理解していたそこのあなた!!
