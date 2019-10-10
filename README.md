@@ -39,8 +39,8 @@ windows非対応
 1. [実践Git]()
 ---
 ## GitHubの基礎
-1. [GitHub is 何?](https://google.com)
-1. [GitHubの用語達](https://google.com)
+1. [GitHub is 何?](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/what_is_github.md)
+1. [GitHubの用語達](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/words_for_github.md)
 1. [実践GitHub](https://google.com)
 
 ---

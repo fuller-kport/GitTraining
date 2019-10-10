@@ -39,7 +39,6 @@ RoleInfo ROLE_INFOS[] = {
 typedef struct{
 	Role role;
 	char name[32];
-	int is_protected;
 	int is_live;
 }Player;
 
@@ -92,7 +91,7 @@ void shuffle(int array[], int size)
 int ballot_winner(int ballot_box[], int size){
 	int max = 0;
 	for(int i=0; i<size; i++) {
-		if (ballot_box[max] < ballot_box[i]) max = i;
+		if (ballot_box[max] < ballot_box[i]) max = i; 
 	}
 	int j = 0;
 	int arr[PLAYERS_NUM_MAX];
@@ -117,7 +116,7 @@ void clean_stdin(void){
 
 //上の関数を待機用として用いる
 void wait_key(void) {
-	printf("<ENTER>");
+	printf("<ENTER>\n");
 	clean_stdin();
 }
 
@@ -188,7 +187,9 @@ void daytime(Player players[], int players_num){
 //夜のターン
 void midnight(Player players[], int players_num){
 	int werewolf_ballot_box[PLAYERS_NUM_MAX];
+	int is_protected[PLAYERS_NUM_MAX];
 	for(int i=0; i<players_num; i++) werewolf_ballot_box[i] = 0;
+	for(int i=0; i<players_num; i++) is_protected[i] = 0;
 
 	for(int i=0; i<players_num; i++) {
 		//死んでる人はパス
@@ -221,7 +222,7 @@ void midnight(Player players[], int players_num){
 				}
 				break;
 			case WEREWOLF:
-				printf("がぶぅ! するあいて だれ?\n");
+				printf("がぶぅ! するあいて だれ?\n"); //表現に問題あり
 				n = read_living_other_than_myself_player_num(players, players_num, i);
 				werewolf_ballot_box[n]++;
 				break;
@@ -238,14 +239,13 @@ void midnight(Player players[], int players_num){
 			case HUNTER:
 				printf("今夜守るべきは…\n");
 				n = read_living_other_than_myself_player_num(players, players_num, i);
-				players[n].is_protected = 1;
+				is_protected[n] = 1;
 				break;
 		}
 		puts("\033[2J");
 	}
 	int kill = ballot_winner(werewolf_ballot_box, players_num);
-	if (!players[kill].is_protected) players[kill].is_live = 0;
-	for (int i=0;i<players_num;i++) players[i].is_protected = 0;
+	if (!is_protected[kill]) players[kill].is_live = 0;
 }
 
 int read_roles(int roles[]){
@@ -259,6 +259,7 @@ int read_roles(int roles[]){
 		for (int j=0;j<ROLES_NUM;j++) {
 			printf("%s: \tNo.%d \t%d人\n", ROLE_INFOS[j].name, j+1, each_num[j]);
 		}
+		printf("終了: \tNo.0");
 		printf("\n追加する役職番号を入力してください\n");
 		for (;;) {
 			printf("No.");
@@ -285,8 +286,7 @@ int main(void){
 
 	for(int i=0;i<players_num;i++) {
 		players[i].is_live = 1;
-		players[i].is_protected = 0;
-		players[i].role = (Role)roles[i];
+		players[i].role = (Role)roles[i]; //roles[i]の手前の(Role)が何を示すのか分からなかった
 	}
 
 	printf("ある朝平和な村で死体が発見されました\n");
@@ -295,7 +295,7 @@ int main(void){
 
 	for (int i=0;i<players_num;i++) {
 		printf("hi! player No.%d あなたの名前は?\n", i);
-		readLine(players[i].name, sizeof(players[i].name));
+		readLine(players[i].name, sizeof(players[i].name)); 
 		printf("%s さん，貴方は %s です\n", players[i].name, ROLE_INFOS[players[i].role].name);
 		wait_key();
 		puts("\033[2J");
