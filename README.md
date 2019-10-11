@@ -36,12 +36,12 @@ windows非対応
 ## Gitの基礎
 1. [Git is 何?](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/what_is_git.md)
 1. [Gitの用語達](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/words_for_git.md)
-1. [実践Git]()
+1. [実践Git](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/practice_for_git.md)
 ---
 ## GitHubの基礎
 1. [GitHub is 何?](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/what_is_github.md)
 1. [GitHubの用語達](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/words_for_github.md)
-1. [実践GitHub](https://google.com)
+1. [実践GitHub](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/practice_for_github.md)
 
 ---
 ## ここまで完全に理解していたそこのあなた!!
