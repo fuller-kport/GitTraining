@@ -18,6 +18,8 @@ Git使えない系高専生: 「でも…　難しいんでしょう… ?」
 今ならGitだけでなく GitHub! GitHubのチュートリアルまでついてきます!!  
 さぁ! 是非あなたも分散型バージョン管理システム Git, GitHub を手に入れて快適な高専生活を!  
 
+この面倒くさいノリここだけだから(多分)帰らないで
+
 ---
 ## 予備知識
 windows非対応
@@ -35,13 +37,16 @@ windows非対応
 ---
 ## Gitの基礎
 1. [Git is 何?](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/what_is_git.md)
-1. [Gitの用語達](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/words_for_git.md)
-1. [実践Git](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/practice_for_git.md)
+1. [Gitの用語達 + コマンド](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/words_for_git.md)
 ---
 ## GitHubの基礎
 1. [GitHub is 何?](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/what_is_github.md)
-1. [GitHubの用語達](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/words_for_github.md)
-1. [実践GitHub](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/practice_for_github.md)
+1. [GitHubの用語達 + コマンド](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/words_for_github.md)
+
+
+## せっかくだしなんか作ってみるか
+1. [実践Git](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/practice_for_git.md)
+1. [+=GitHub](https://github.com/fuller-kport/GitTraining/blob/master/resource/pages/practice_for_github.md)
 
 ---
 ## ここまで完全に理解していたそこのあなた!!
