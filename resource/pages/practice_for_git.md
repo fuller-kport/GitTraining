@@ -32,7 +32,7 @@ Gitの演習には一体何がふさわしいのか色々考えるわけだ．
 
 ### 仕様
 ユーザからの入力はどこから?
-端末の標準入出力から
+- 端末の標準入出力から
 
 どんな役職がある?
 - 村人
@@ -68,6 +68,26 @@ mkdir [ディレクトリ名]
 ```
 //カレント(現在の)ディレクトリを変更
 cd [変更先のディレクトリ]
+```
+[テキストエディタ](https://www.jetbrains.com/)でファイルを作る…
+
+作るファイルは次の2つ
+1. Makefile
+```
+TARGET = main.c
+
+make_and_run:
+	gcc -o werewolf.out $(TARGET)
+	./werewolf.out
+```
+1. main.c
+```
+# include <stdio.h>
+
+int main(void){
+	printf("人狼");
+	return 0;
+}
 ```
 
 
