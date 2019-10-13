@@ -174,12 +174,14 @@ git commit -m "プレイヤーを表す型を定義"
 
 ## step3 プレイヤー達を作る
 プレイヤーをどう表すかが決まったので，実際にプレイヤー達を作る．
+コメントの役職を割り振るってとこを雑に書くってこと．
 
 とにかく早く全体を動かしたいので，後回しに出来るところを省く(夏休み前半の愚行)．
 プレイヤーに役職や名前を割り振るところとか飛ばせますねぇ…
 
-[こんな感じに](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step2/main.c)
+[こんな感じにね](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step2/main.c)
 
+TODO: if you have question,Fill me
 
 
 
