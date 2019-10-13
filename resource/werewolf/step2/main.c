@@ -1,5 +1,22 @@
 #include <stdio.h>
 
+//名前の最大文字数
+#define NAME_MAX_NUM 32
+
+//役職を表すRole型を定義
+//始めは単純な物を作りたいので，今はVILLAGER(村人)とWEREWOLF(人狼)だけだ．
+typedef enum{
+	VILLAGER, //実際は0
+	WEREWOLF  //実際は1
+}Role;
+
+//プレイヤーを表すPlayer型を定義
+typedef struct{
+	Role role;               //役職番号
+	char[NAME_MAX_NUM] name; //
+	int is_live;             //生きているなら1, 死んでいるなら0
+}Player;
+
 int main(void){
 	printf("人狼");
 //	役職を割り振る
