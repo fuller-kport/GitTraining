@@ -164,10 +164,9 @@ typedef struct{
 }Player;
 ```
 
-main.cに追記しよう [こんな感じに](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step2/main.c)
-コンパイルは通るかな?
+main.cに追記しよう… [こんな感じに](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step2/main.c)
 
-通ったらコミットしよう!
+コンパイルは通るかな? 通ったらコミットしよう!
 ```
 git add --all
 git commit -m "プレイヤーを表す型を定義"
