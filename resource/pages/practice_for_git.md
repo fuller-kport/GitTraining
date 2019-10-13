@@ -164,6 +164,6 @@ typedef struct{
 }Player;
 ```
 
-main.cに追記しよう [こんな感じに](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step2)
+main.cに追記しよう [こんな感じに](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step2/main.c)
 
 
