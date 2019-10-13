@@ -143,8 +143,8 @@ git commit -m "全体の構成をコメントとして追加"
 この3つのセットだから構造体を使うのが自然だ．
 Player構造体を作ってみよう! 
 
-ここで問題になるのが役職をどう扱うかだ…今回は番号として扱う事にした．
-数字のままだと分かりにくいのでenumタイプの型を作って，人にもわかりやすいようにしよう．
+ここで問題になるのが役職をどう扱うかだ…今回は番号として扱う事にする．
+数字のままだと分かりにくいのでenumタイプの型を作って，人にもわかりやすいようにした．
 ```
 //名前の最大文字数
 #define NAME_MAX_NUM 32
@@ -165,5 +165,24 @@ typedef struct{
 ```
 
 main.cに追記しよう [こんな感じに](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step2/main.c)
+コンパイルは通るかな?
+
+通ったらコミットしよう!
+```
+git add --all
+git commit -m "プレイヤーを表す型を定義"
+```
+
+## step3 プレイヤー達を作る
+プレイヤーをどう表すかが決まったので，実際にプレイヤー達を作る．
+
+とにかく早く全体を動かしたいので，後回しに出来るところを省く(夏休み前半の愚行)．
+プレイヤーに役職や名前を割り振るところとか飛ばせますねぇ…
+
+[こんな感じに](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step2/main.c)
+
+
+
+
 
 
