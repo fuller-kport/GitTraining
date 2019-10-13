@@ -119,7 +119,7 @@ git init
 まずmain.cを編集する．
 見通しよくプログラムを書くためにさっき書いたコメントを追加しよう．
 
-[現在の状態]()
+[現在の状態](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step1/main.c)
 
 
 
