@@ -121,6 +121,12 @@ git init
 
 [現在の状態](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step1)
 
-
+追加できたらGitに現在の状態を記録しよう!
+```
+//このリポジトリの管理下の全ての変更を記録することにする (インデックスに追加)
+git add --all
+//コメントをつけて記録する (インデックスに追加)
+git commit -m "全体の構成をコメントとして追加"
+```
 
 
