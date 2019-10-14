@@ -2,7 +2,7 @@
 
 //名前の最大文字数
 #define NAME_MAX_NUM 32
-#define NAME_MAX_NUM 32
+#define ROLE_STR_MAX_NUM 32
 #define PLAYERS_MAX_NUM 30
 
 //役職を表すRole型を定義
@@ -11,12 +11,23 @@ typedef enum{
 	WEREWOLF  //実際は1
 }Role;
 
+char ROLE_STRINGS[][ROLE_STR_MAX_NUM] = {"村人", "狼"};
+
 //プレイヤーを表すPlayer型を定義
 typedef struct{
 	Role role;               //役職番号
 	char name[NAME_MAX_NUM]; //名前
 	int is_live;             //生きているなら1, 死んでいるなら0
 }Player;
+
+void show_players(Player p[], int p_num){
+	printf("\n");
+	printf("~~~~~~~~~~~~~~~~~~~~~~~ << players! >> ~~~~~~~~~~~~~~~~~~~~~~~\n");
+	for(int i=0;i<p_num;i++){
+		if (p[i].is_live) printf("No.%d\t name: %s role:%s\n", i, p[i].name, ROLE_STRINGS[p[i].role]);
+	}
+	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+}
 
 int main(void){
 	printf("人狼");
@@ -27,10 +38,12 @@ int main(void){
 	Role roles[] = {VILLAGER, VILLAGER, VILLAGER, VILLAGER, WEREWOLF};
 //		各プレイヤーの名前を入力してもらう+プレイヤーに役職を教える
 	for (int i=0;i<players_num;i++){
-		players[i].is_live = 1; //生きてることにする
 		players[i].role = roles[i]; //就職
+		sprintf(players[i].name, "hoge");  //名前は適当に
+		players[i].is_live = 1; //生きてることにする
 	}
 
+	show_players(players, players_num);
 //	昼のターン
 //		一定時間待つ
 //		処刑したい人を選んでもらう
