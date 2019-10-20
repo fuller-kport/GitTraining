@@ -91,14 +91,31 @@ void clear(){
 	puts("\033[2J");
 };
 
+void mathematical_exercises(){
+	int sol;
+	int val1 = rand()%1000;
+	int val2 = val1 + rand()%10;
+	printf("数理演習 問1  %d - %d = ?\n", val2, val1);
+	for (;;) {
+		printf("A: ");
+		scanf("%d", &sol);
+		wait_key();
+		if (sol == val2 - val1) {
+			break;
+		}else{
+			printf("留年\n\n");
+		}
+	}
+};
+
 int main(void){
 	printf("人狼");
 	Player players[PLAYERS_MAX_NUM];
-//	役職を割り振る
-//		各役職の人数を入力してもらう
+	//	役職を割り振る
+	//		各役職の人数を入力してもらう
 	int players_num = 5;
 	Role roles[] = {VILLAGER, VILLAGER, VILLAGER, VILLAGER, WEREWOLF};
-//		各プレイヤーの名前を入力してもらう+プレイヤーに役職を教える
+	//		各プレイヤーの名前を入力してもらう+プレイヤーに役職を教える
 	for (int i=0;i<players_num;i++){
 		players[i].role = roles[i]; //就職
 		sprintf(players[i].name, "hoge");  //名前は適当に
@@ -109,7 +126,7 @@ int main(void){
 	show_players(players, players_num);
 	printf("話し合ってください\n");
 	wait_key();//入力をまつ
-//処刑したい人を選んでもらう
+	//処刑したい人を選んでもらう
 	clear();
 	int ballot_box[PLAYERS_MAX_NUM];//投票箱
 	for(int i=0;i<players_num;i++)ballot_box[i] = 0;
@@ -120,17 +137,44 @@ int main(void){
 		ballot_box[n]++;
 		clear();
 	}
-//誰かが火あぶりにされる
+	//誰かが火あぶりにされる
 	int dead = ballot_winner(ballot_box, players_num);
 	players[dead].is_live = 0;//死んだことにする
 	printf("No.%d %s さんを処刑しました\n", dead, players[dead].name);
 
-//		終了判定 (人狼の数が村人の人数以上なら人狼の，村人しかいないなら村人の勝利)
-//	夜のターン
-//		各プレイヤーの役職に応じて行動してもらう．
-//		各プレイヤーの状態を決める
-//		終了判定 (人狼の数が村人の人数以上なら人狼の，村人しかいないなら村人の勝利)
-//	各プレイヤーに夜のターンの結果を知らせる
-//	1に戻る
+	//		終了判定 (人狼の数が村人の人数以上なら人狼の，村人しかいないなら村人の勝利)
+//夜のターン
+	printf("日が沈み，恐ろしい夜が訪れました\n");
+	wait_key();
+	clear();
+
+	int ballot_box_werewolf[PLAYERS_MAX_NUM];//人狼が複数居る時にターゲットを投票する
+	for(int i=0;i<players_num;i++)ballot_box_werewolf[i] = 0;
+
+	for(int i=0;i<players_num;i++){
+		if (!players[i].is_live) continue;//死人は飛ばす
+		printf("貴方はNo.%d, %s さんですね?\n", i, players[i].name);
+		wait_key();
+		switch(players[i].role){//各プレイヤーの役職に応じて行動してもらう．
+			case VILLAGER://村人だけ異常に早いの嫌だから長岡高専名物数理演習!!をやってもらう
+				mathematical_exercises();
+				break;
+			case WEREWOLF://殺しの対象を投票
+				printf("今夜の獲物は?\n");
+				int n = read_living_other_than_myself_player_num(players, players_num, i);
+				ballot_box[n]++;
+				break;
+		}
+		clear();
+	}
+	//各プレイヤーの状態を決める
+	int werewolf_target = ballot_winner(ballot_box_werewolf, players_num);
+	players[werewolf_target].is_live = 0;//死んだことにする
+
+	show_players(players, players_num);
+	wait_key();
+	//		終了判定 (人狼の数が村人の人数以上なら人狼の，村人しかいないなら村人の勝利)
+	//	各プレイヤーに夜のターンの結果を知らせる
+	//	1に戻る
 	return 0;
 }
