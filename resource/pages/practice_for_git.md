@@ -287,12 +287,40 @@ int read_living_other_than_myself_player_num(Player players[], int players_num, 
 }
 ```
 
+コミットしよう!
+
 ### 投票の犠牲者を選ぶ
 各プレイヤーが何回ずつ投票されたかを配列に記録する事にする，
 ここではその配列を受け取って投票の勝者を一人選ぶ関数を作ろう!．
 
+```
+//rand関数を使うためいる，#include ~はファイルの最初に書く
+#include <stdlib.h>
 
+//投票を集計して一人選ぶ
+int ballot_winner(int ballot_box[], int size){
+	int max = 0;//最大の得票数
+	for(int i=0; i<size; i++) {
+		if (max < ballot_box[i]) max = ballot_box[i]; 
+	}
+	int j = 0;//最大の投票数を得た人は何人いるか
+	int arr[PLAYERS_MAX_NUM];//最大の投票数の人達(j人)
+	for(int i=0; i<size; i++) {
+		if (ballot_box[max] == ballot_box[i]){
+			arr[j] = i;
+			j++;
+		}
+	}
+	return arr[rand()%j];
+}
+```
 
-###
+コミットした?
+
+### 関数を使う
+ここまでで昼のターンを構成するパーツたちが揃った!
+これらを使って昼のターンを作ろう!
+
+全部合わせると[こんな風に](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step4/main.c)なる
 
 
