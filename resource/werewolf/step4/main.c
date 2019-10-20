@@ -20,7 +20,7 @@ typedef struct{
 	int is_live;             //生きているなら1, 死んでいるなら0
 }Player;
 
-//プレイヤーの情報を表示 今は開発しやすいように役職も表示
+//プレイヤー達の情報を表示
 void show_players(Player p[], int p_num){
 	printf("\n");
 	printf("~~~~~~~~~~~~~~~~~~~~~~~ << players! >> ~~~~~~~~~~~~~~~~~~~~~~~\n");
@@ -29,6 +29,8 @@ void show_players(Player p[], int p_num){
 	}
 	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 }
+
+
 
 int main(void){
 	printf("人狼");
