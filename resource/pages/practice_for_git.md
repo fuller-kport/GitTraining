@@ -183,7 +183,7 @@ git commit -m "プレイヤーを表す型を定義"
 
 ついでにプレイヤーの状態を見られると便利なのでそのための関数を作って使う．
 
-[こんな感じにね](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step2/main.c)
+[こんな感じにね](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step3/main.c)
 
 実行すると，上手く行っているのならプレイヤーの状態が見られるはずだ．
 
