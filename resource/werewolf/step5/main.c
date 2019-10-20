@@ -108,7 +108,7 @@ int main(void){
 //昼のターン
 	show_players(players, players_num);
 	printf("話し合ってください\n");
-	wait_key();//一定時間待つ(今回は入力をまつ)
+	wait_key();//入力をまつ
 //処刑したい人を選んでもらう
 	clear();
 	int ballot_box[PLAYERS_MAX_NUM];//投票箱
@@ -124,6 +124,7 @@ int main(void){
 	int dead = ballot_winner(ballot_box, players_num);
 	players[dead].is_live = 0;//死んだことにする
 	printf("No.%d %s さんを処刑しました\n", dead, players[dead].name);
+
 //		終了判定 (人狼の数が村人の人数以上なら人狼の，村人しかいないなら村人の勝利)
 //	夜のターン
 //		各プレイヤーの役職に応じて行動してもらう．
