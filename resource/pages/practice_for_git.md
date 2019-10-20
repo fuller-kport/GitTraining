@@ -359,7 +359,7 @@ step4ではmasterから分岐した流れである`add_daytime`を編集して�
       *-*-*     (add_daytime)
 ```
 
-まずはブランチを移動しよう，`master`が`add_daytime`を取り込みたいからだ．
+まずはカレントブランチを`master`にしよう，`master`が`add_daytime`を取り込みたいからだ．
 
 カレントブランチを変えるコマンドはこれ
 ```
