@@ -318,9 +318,15 @@ int ballot_winner(int ballot_box[], int size){
 コミットした?
 
 ### 関数を使う
-ここまでで昼のターンを構成するパーツたちが揃った!
+ここまでで昼のターンを構成するパーツたちが揃った．
 これらを使って昼のターンを作ろう!
 
 全部合わせると[こんな風に](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step4/main.c)なる
 
+`make`でコンパイル，実行してみて欲しい．
+上手く処刑出来ている事を確認したらコミットして長かった昼のターンは終わりだ!
+
+## マージ(merge)しよう!
+
+## step5 夜のターン
 
