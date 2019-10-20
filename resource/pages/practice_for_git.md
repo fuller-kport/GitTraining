@@ -306,7 +306,7 @@ int ballot_winner(int ballot_box[], int size){
 	int j = 0;//最大の投票数を得た人は何人いるか
 	int arr[PLAYERS_MAX_NUM];//最大の投票数の人達(j人)
 	for(int i=0; i<size; i++) {
-		if (ballot_box[max] == ballot_box[i]){
+		if (ballot_box[i] == max){
 			arr[j] = i;
 			j++;
 		}
@@ -324,9 +324,45 @@ int ballot_winner(int ballot_box[], int size){
 全部合わせると[こんな風に](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step4/main.c)なる
 
 `make`でコンパイル，実行してみて欲しい．
-上手く処刑出来ている事を確認したらコミットして長かった昼のターンは終わりだ!
+上手く処刑出来ている事を確認したらコミットして長かった昼のターン製作は終わりだ!やったぜ!
+~~まだ終了判定は残ってるけど~~
+
+コミットしてね，めんどくさがらずに．
 
 ## マージ(merge)しよう!
+今コミットの流れは２つある，`master`と`add_daytime`だ．
+
+step4ではmasterから分岐した流れである`add_daytime`を編集して昼のターンを実装したわけだ．
+つまり`master`はまだstep3を終えた直後なので，
+今回は`add_daytime`で記録した変更を`master`にも取り込みたい．
+
+ブランチBの変更をブランチAに取り込むことをBをAにマージすると言う．
+図で表すとこんな感じ，マージした時点で勝手にコミットされるんすね．
+```
+*-*-*-   (master)
+     \
+      *-*-*  (add_daytime)
+```
+↓add_daytimeをmasterにマージ
+```
+*-*-*-------*   (master)
+     \     /
+      *-*-*     (add_daytime)
+```
+
+まずはブランチを移動しよう，`master`が`add_daytime`を取り込みたいからだ．
+
+カレントブランチを変えるコマンドはこれ
+```
+git checkout [ブランチ名]
+```
+
+マージのコマンドはこれ
+```
+//変更を取り込むのはカレントブランチ
+git merge [取り込みたいブランチ]
+```
 
 ## step5 夜のターン
+
 

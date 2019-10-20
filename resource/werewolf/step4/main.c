@@ -76,15 +76,20 @@ int ballot_winner(int ballot_box[], int size){
 		if (max < ballot_box[i]) max = ballot_box[i]; 
 	}
 	int j = 0;//最大の投票数を得た人は何人いるか
-	int arr[PLAYERS_MAX_NUM];//最大の投票数の人達(j人)
+	int arr[PLAYERS_MAX_NUM];//最大の投票数を得た人達(j人)
 	for(int i=0; i<size; i++) {
-		if (ballot_box[max] == ballot_box[i]){
+		if (ballot_box[i] == max){
 			arr[j] = i;
 			j++;
 		}
 	}
 	return arr[rand()%j];
 }
+
+//画面を綺麗にする
+void clear(){
+	puts("\033[2J");
+};
 
 int main(void){
 	printf("人狼");
@@ -101,10 +106,24 @@ int main(void){
 	}
 
 	show_players(players, players_num);
-//	昼のターン
-//		一定時間待つ
-//		処刑したい人を選んでもらう
-//		誰かが火あぶりにされる
+//昼のターン
+	printf("話し合ってください\n");
+	wait_key();//一定時間待つ(今回は入力をまつ)
+//処刑したい人を選んでもらう
+	clear();
+	int ballot_box[PLAYERS_MAX_NUM];//投票箱
+	for(int i=0;i<players_num;i++)ballot_box[i] = 0;
+	for(int i=0;i<players_num;i++){
+		show_players(players, players_num);
+		printf("No.%d %sさんですね? 投票したい人の番号を入力してください\n", i, players[i].name);
+		int n = read_living_other_than_myself_player_num(players, players_num, i);
+		ballot_box[n]++;
+		clear();
+	}
+//誰かが火あぶりにされる
+	int dead = ballot_winner(ballot_box, players_num);
+	players[dead].is_live = 0;//死んだことにする
+	printf("No.%d %s さんを処刑しました\n", dead, players[dead].name);
 //		終了判定 (人狼の数が村人の人数以上なら人狼の，村人しかいないなら村人の勝利)
 //	夜のターン
 //		各プレイヤーの役職に応じて行動してもらう．
