@@ -451,8 +451,8 @@ WinSide win_side(Player p[], int p_num){
 無かった事にすると言っても色々ある
 
 ちなみにGitではコミットをこんな記号たちで表す
--HEAD      :ワーキングツリーの最新のコミット
--ORIG_HEAD :HEADが移動するコマンドを叩いた際に、コマンド実行時のHEADの位置を記録
+- HEAD      :ワーキングツリーの最新のコミット
+- ORIG_HEAD :HEADが移動するコマンドを叩いた際に、コマンド実行時のHEADの位置を記録
 ```
 //直前の
 git reset --hard ORIG_HEAD
