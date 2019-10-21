@@ -439,10 +439,11 @@ WinSide win_side(Player p[], int p_num){
 無かったことにしたい．
 
 ```
-
-*-*-*-------*---*---         (master)
-     \     / \ / \
-      *-*-*   *   *-
+                  こいつを亡きものにしたい
+                    ↓
+*-*-*-------*---*---* (master)
+     \     / \ / \ /
+      *-*-*   *   * (finish)
 (add_daytime) (add_midnight)
 
 ```
