@@ -381,7 +381,61 @@ git merge [取り込みたいブランチ]
 村人には長岡高専電子制御科名物の数理演習をやってもらう!
 `mathematical_exercises()`関数がそれなんだけど，特に気にしなくていい．
 
-`make`で実行すると人狼が選んだプレイヤーがリストから消える様子が見えるはずだ．
+`make`で実行すると夜のターンで人狼が選んだプレイヤーがリストから消える様子が見えるはずだ．
+
+`master`に`add_midnight`をマージしてここは終わり．
+
+いやぁ〜長かった! 次で終わりだ!
+
+## step6 最後(大嘘)の仕上げ
+面倒かもしれないがまたブランチを切ろう(masterから分けてね)，名前は`finish`とか?
+
+このままだとゲーム(夜が明けたら)終わっちゃうね!
+
+昼のターンと夜のターンをループに入れて…
+
+このままじゃゲーム終わんないね!
+
+```
+//どの陣営が勝ったか
+typedef enum{
+	NONE,
+	VILLAGER_SIDE,
+	WEREWOLF_SIDE
+}WinSide;
+
+//勝った陣営を返す
+WinSide win_side(Player p[], int p_num){
+	int werewolf_num = 0;
+	int villager_num = 0;
+	for(int i=0;i<p_num;i++){
+		if(!p[i].is_live)continue;
+		switch(p[i].role){
+			case VILLAGER: villager_num++;break;
+			case WEREWOLF: werewolf_num++;break;
+		}
+	}
+	if(villager_num <= werewolf_num)return WEREWOLF_SIDE;
+	if(werewolf_num <= 0)return VILLAGER_SIDE;
+	return NONE;
+}
+
+```
+これが勝者側を判定する関数だ!
+この関数を[こんな感じに](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step6/main.c)
+使って，ゲームが終了するようになった．
+
+`make`! やったぜ動いた! 思ったとおりに動いているなら完成だ!
+
+`master`にマージして
+
+終 NHK…
+あれ? 前半に放置したところやって無い…
+
+## step7 
+さっき`finish`ブランチを`master`にマージしちゃったけどまだ作業が残ってた…
+`finish`ブランチを取り込んだのに完成していないのはなんか変だ，だから`finish`ブランチのマージを
+無かったことにしたい．
 
 
 

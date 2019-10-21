@@ -131,6 +131,7 @@ int main(void){
 	int ballot_box[PLAYERS_MAX_NUM];//投票箱
 	for(int i=0;i<players_num;i++)ballot_box[i] = 0;
 	for(int i=0;i<players_num;i++){
+		if(!players[i].is_live)continue;
 		show_players(players, players_num);
 		printf("No.%d %sさんですね? 投票したい人の番号を入力してください\n", i, players[i].name);
 		int n = read_living_other_than_myself_player_num(players, players_num, i);
@@ -162,7 +163,7 @@ int main(void){
 			case WEREWOLF://殺しの対象を投票
 				printf("今夜の獲物は?\n");
 				int n = read_living_other_than_myself_player_num(players, players_num, i);
-				ballot_box[n]++;
+				ballot_box_werewolf[n]++;
 				break;
 		}
 		clear();
