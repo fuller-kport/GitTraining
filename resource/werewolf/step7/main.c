@@ -4,6 +4,7 @@
 //名前の最大文字数
 #define NAME_MAX_NUM 32
 #define ROLE_STR_MAX_NUM 32
+#define ROLES_NUM 2
 #define PLAYERS_MAX_NUM 30
 
 //役職を表すRole型を定義
@@ -130,14 +131,77 @@ WinSide win_side(Player p[], int p_num){
 	return NONE;
 }
 
+//役職の配列を完全にランダムに並び替える
+void shuffle(Role array[], int size){
+	int i = size;
+	while (i > 1) {
+		int j = rand() % i;
+		i--;
+		int t = array[i];
+		array[i] = array[j];
+		array[j] = t;
+	}
+}
+
+//バッファに読めるだけ読み込んで後は捨てる
+void readLine(char buf[], int buf_size) {
+	int i;
+	char c;
+	for(i=0; i<buf_size; i++) {
+		buf[i] = getchar();
+		if (buf[i] == '\n') {
+			buf[i] = '\0';
+			return;
+		}
+	}
+	buf[buf_size-1] = '\0';
+	clean_stdin();
+}
+
+//各役職の人数を読み込み合計人数を返す
+int read_roles(Role roles[]){
+	int n;
+	int players_num = 0;
+	int each_role_num[ROLES_NUM];
+	for (int i=0;i<ROLES_NUM;i++) each_role_num[i] = 0;
+
+	for (;;) {
+		clear();
+		printf("人数は最大 合計%d 人です\n", PLAYERS_MAX_NUM);
+		printf("現在の人数はそれぞれ以下の通りです\n");
+		for (int i=0;i<ROLES_NUM;i++) {
+			printf("%s: \tNo.%d \t%d人\n", ROLE_STRINGS[i], i+1, each_role_num[i]);
+		}
+		printf("決定: \tNo.0");
+		printf("\n増やしたい役職番号を入力してください -付きで減らせます\n");
+		for (;;) {//正しい入力があるまでループ
+			printf("No.");
+			scanf("%d", &n);
+			if (-ROLES_NUM<=n && n<=ROLES_NUM) break;
+		}
+		if (n == 0 && players_num > 0) return players_num;
+		if (n > 0){
+			if (players_num >= PLAYERS_MAX_NUM-1) continue;
+			each_role_num[n-1]++;
+			roles[players_num] = n-1;
+			players_num++;
+		}else{
+			if (players_num <= 1) continue;
+			each_role_num[abs(n)-1]--;
+			players_num--;
+		}
+	}
+}
+
 int main(void){
 	printf("人狼");
 	Player players[PLAYERS_MAX_NUM];
-	//	役職を割り振る
-	//		各役職の人数を入力してもらう
-	int players_num = 5;
-	Role roles[] = {VILLAGER, VILLAGER, VILLAGER, VILLAGER, WEREWOLF};
-	//		各プレイヤーの名前を入力してもらう+プレイヤーに役職を教える
+//役職を割り振る
+	//各役職の人数を入力してもらう
+	Role roles[PLAYERS_MAX_NUM];
+	int players_num = read_roles(roles);
+
+	//各プレイヤーの名前を入力してもらう+プレイヤーに役職を教える
 	for (int i=0;i<players_num;i++){
 		players[i].role = roles[i]; //就職
 		sprintf(players[i].name, "hoge");  //名前は適当に

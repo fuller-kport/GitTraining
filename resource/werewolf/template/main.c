@@ -75,8 +75,7 @@ int try_exit(Player p[], int num){
 }
 
 //int配列を完全にランダムに並び替える
-void shuffle(int array[], int size)
-{
+void shuffle(int array[], int size){
 	int i = size;
 	while (i > 1) {
 		int j = rand() % i;
