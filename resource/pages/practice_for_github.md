@@ -10,9 +10,13 @@
 ## リモートリポジトリを作る
 GitHubのアカウントが出来たらログインしよう．
 左側のRepositoriesって欄に`New`って書いてあるボタンがあるはず…
-```
+
+そこを押すと作るリポジトリの名前や，privateかpublic…公開するかどうかを聞かれる．
+名前は好きに決めていい，この例では`my_werewolf_gamemaster`にしとく．
 
 ## リポジトリをリモートリポジトリに紐付ける
+```
+
 git remote add origin git@github.com:cook-a-doodle-doo/test.git
 git push -u origin master
 ```
