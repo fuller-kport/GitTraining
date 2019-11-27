@@ -144,7 +144,7 @@ srand((unsigned int)(time(NULL)));
 
 新しく関数`daytime()`と`midnight()`を作り，そこにmain関数にベタが書きしていた処理をまとめよう．
 
-そしたらこんな風に昼夜それぞれのターンの前の状態を記録しておく．
+死んだ人を表示するために，こんな風に昼夜それぞれのターンの前の状態を記録しておく．
 ```
 //現状の生死の状態を記録
 for (int i=0;i<players_num;i++) players_ld[i] = players[i].is_live;
