@@ -84,11 +84,48 @@ git clone [リモートリポジトリのurl]
 
 ## 君の作業
 君は元々の予定通り，`finish`ブランチに直接コミットすることにした．
-君のローカルリポジトリに移動し作業を始めよう．
+君のローカルリポジトリのfinishブランチに移動し作業を始めよう．
 
 ### 名前を入力してもらう
+```
+//読めるだけ読み込んで後は捨てる
+void read_line(char buf[], int buf_size) {
+	int i;
+	char c;
+	for(i=0; i<buf_size; i++) {
+		buf[i] = getchar();
+		if (buf[i] == '\n') {
+			buf[i] = '\0';
+			return;
+		}
+	}
+	buf[buf_size-1] = '\0';
+	clean_stdin();
+}
+```
+これが文字列を読み込む関数だ，引数で指定した配列に一行文字列を読み込む．
+最大まで読み込んだ時文字が余っていたら捨てている．捨てないと次の入力が誤作動するからだ．
+
+```
+for (int i=0;i<players_num;i++){
+	players[i].role = roles[i]; //就職
+	players[i].is_live = 1; //生きてることにする
+}
+
+//名前の入力と役職提示
+for (int i=0;i<players_num;i++) {
+	printf("Player No.%d あなたの名前は?\n", i);
+	read_line(players[i].name, sizeof(players[i].name)); 
+	printf("%s さん，貴方は %s です\n", players[i].name, ROLE_STRINGS[players[i].role]);
+	wait_key();
+	clear();
+}
+```
+使う時は，今までhogeを適当に代入していた箇所を消して，こんな感じで使う．
+
 ### 乱数を本当にランダムにする
 ### 昼夜の間に死んだ人を表示
+
 
 
 ## A君の作業:  夜の間に死んだ人を表示
