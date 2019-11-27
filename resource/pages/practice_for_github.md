@@ -139,8 +139,50 @@ srand((unsigned int)(time(NULL)));
 ```
 
 ### 昼夜の間に死んだ人を表示
+この作業はちょっと変更が大きくなる．
+というのも昼のターンと夜のターンをそれぞれ関数にまとめてしまうからだ…~~わかりやすくするためだけの為に~~
 
+新しく関数`daytime()`と`midnight()`を作り，そこにmain関数にベタが書きしていた処理をまとめよう．
 
+そしたらこんな風に昼夜それぞれのターンの前の状態を記録しておく．
+```
+//現状の生死の状態を記録
+for (int i=0;i<players_num;i++) players_ld[i] = players[i].is_live;
+//夜のターン
+midnight(players, players_num);
+print_cadavers(players_ld, players, players_num);//死んだ人を表示
+```
+
+そして各ターンの前後の違いから，その間に死んた人を表示する関数はこうだ．
+```
+void print_cadavers(int before[], Player after[], int players_num){
+	int count=0;
+	for (int i=0;i<players_num;i++) {
+		if(before[i] != after[i].is_live){
+			printf("No.%d %s さんは死亡しました\n", i, after[i].name);
+			count++;
+		}
+	}
+	if (count == 0) printf("誰も死にませんでした\n");
+}
+```
+
+複数人死者が出てもいいから，サイコキラーとか猫又とかが実装しやすくなるね!
+最終的には[こんな感じ](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step7/you)だ!
+
+コミットも忘れずに!
+
+### GitHubに反映させる
+ローカルリポジトリの変更が終わった!
+これをGitHubに反映させれば後はA君の作業を待つばかりだ．
+
+次のコマンドでローカルリポジトリの履歴をリモートリポジトリに反映出来る．
+```
+git push origin [更新を反映させたいブランチ]
+```
+更新を反映させたいブランチに指定した名前と同じ名前の`origin`上のブランチに変更を反映する．
+今回の場合は
+`git push origin finish`とすれば良いわけだ．これで君の仕事は一区切りついた．
 
 ## A君の作業:  夜の間に死んだ人を表示
 A君はホストに変更内容を取り込んでもらう方針で編集しようと考えた．

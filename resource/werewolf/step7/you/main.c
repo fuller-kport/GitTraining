@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 //名前の最大文字数
 #define NAME_MAX_NUM 32
 #define ROLE_STR_MAX_NUM 32
-#define ROLES_NUM 2
 #define PLAYERS_MAX_NUM 30
 
 //役職を表すRole型を定義
@@ -13,7 +13,7 @@ typedef enum{
 	WEREWOLF  //実際は1
 }Role;
 
-char ROLE_STRINGS[][ROLE_STR_MAX_NUM] = {"村人", "狼"};
+char ROLE_STRINGS[][ROLE_STR_MAX_NUM] = {"村人", "人狼"};
 
 //今はこの２つだけだね
 typedef enum{
@@ -131,20 +131,60 @@ WinSide win_side(Player p[], int p_num){
 	return NONE;
 }
 
-//役職の配列を完全にランダムに並び替える
-void shuffle(Role array[], int size){
-	int i = size;
-	while (i > 1) {
-		int j = rand() % i;
-		i--;
-		int t = array[i];
-		array[i] = array[j];
-		array[j] = t;
+void daytime(Player players[], int players_num){
+	show_players(players, players_num);
+	printf("話し合ってください\n");
+	wait_key();//入力をまつ
+	//処刑したい人を選んでもらう
+	clear();
+	int ballot_box[PLAYERS_MAX_NUM];//投票箱
+	for(int i=0;i<players_num;i++)ballot_box[i] = 0;
+	for(int i=0;i<players_num;i++){
+		if(!players[i].is_live)continue;//死人は飛ばす
+		show_players(players, players_num);
+		printf("No.%d %s さんですね? 投票したい人の番号を入力してください\n", i, players[i].name);
+		int n = read_living_other_than_myself_player_num(players, players_num, i);
+		ballot_box[n]++;
+		clear();
 	}
+	//誰かが火あぶりにされる
+	int dead = ballot_winner(ballot_box, players_num);
+	players[dead].is_live = 0;//死んだことにする
+	printf("No.%d %s さんを処刑しました\n", dead, players[dead].name);
 }
 
-//バッファに読めるだけ読み込んで後は捨てる
-void readLine(char buf[], int buf_size) {
+void midnight(Player players[], int players_num){
+	printf("日が沈み，恐ろしい夜が訪れました\n");
+	wait_key();
+	clear();
+
+	int ballot_box_werewolf[PLAYERS_MAX_NUM];//人狼が複数居る時にターゲットを投票する
+	for(int i=0;i<players_num;i++)ballot_box_werewolf[i] = 0;
+
+	for(int i=0;i<players_num;i++){
+		if (!players[i].is_live) continue;//死人は飛ばす
+		printf("貴方はNo.%d, %s さんですね?\n", i, players[i].name);
+		wait_key();
+		switch(players[i].role){//各プレイヤーの役職に応じて行動してもらう．
+			case VILLAGER://村人だけ異常に早いの嫌だから長岡高専名物数理演習!!をやってもらう
+				mathematical_exercises();
+				break;
+			case WEREWOLF://殺しの対象を投票
+				show_players(players, players_num);
+				printf("今夜の獲物は?\n");
+				int n = read_living_other_than_myself_player_num(players, players_num, i);
+				ballot_box_werewolf[n]++;
+				break;
+		}
+		clear();
+	}
+	//各プレイヤーの状態を決める
+	int werewolf_target = ballot_winner(ballot_box_werewolf, players_num);
+	players[werewolf_target].is_live = 0;//死んだことにする
+}
+
+//読めるだけ読み込んで後は捨てる
+void read_line(char buf[], int buf_size) {
 	int i;
 	char c;
 	for(i=0; i<buf_size; i++) {
@@ -158,114 +198,58 @@ void readLine(char buf[], int buf_size) {
 	clean_stdin();
 }
 
-//各役職の人数を読み込み合計人数を返す
-int read_roles(Role roles[]){
-	int n;
-	int players_num = 0;
-	int each_role_num[ROLES_NUM];
-	for (int i=0;i<ROLES_NUM;i++) each_role_num[i] = 0;
-
-	for (;;) {
-		clear();
-		printf("人数は最大 合計%d 人です\n", PLAYERS_MAX_NUM);
-		printf("現在の人数はそれぞれ以下の通りです\n");
-		for (int i=0;i<ROLES_NUM;i++) {
-			printf("%s: \tNo.%d \t%d人\n", ROLE_STRINGS[i], i+1, each_role_num[i]);
-		}
-		printf("決定: \tNo.0");
-		printf("\n増やしたい役職番号を入力してください -付きで減らせます\n");
-		for (;;) {//正しい入力があるまでループ
-			printf("No.");
-			scanf("%d", &n);
-			if (-ROLES_NUM<=n && n<=ROLES_NUM) break;
-		}
-		if (n == 0 && players_num > 0) return players_num;
-		if (n > 0){
-			if (players_num >= PLAYERS_MAX_NUM-1) continue;
-			each_role_num[n-1]++;
-			roles[players_num] = n-1;
-			players_num++;
-		}else{
-			if (players_num <= 1) continue;
-			each_role_num[abs(n)-1]--;
-			players_num--;
+void print_cadavers(int before[], Player after[], int players_num){
+	int count=0;
+	for (int i=0;i<players_num;i++) {
+		if(before[i] != after[i].is_live){
+			printf("No.%d %s さんは死亡しました\n", i, after[i].name);
+			count++;
 		}
 	}
+	if (count == 0) printf("誰も死にませんでした\n");
 }
 
 int main(void){
-	printf("人狼");
 	Player players[PLAYERS_MAX_NUM];
-//役職を割り振る
-	//各役職の人数を入力してもらう
-	Role roles[PLAYERS_MAX_NUM];
-	int players_num = read_roles(roles);
+	//	役職を割り振る
+	//		各役職の人数を入力してもらう
+	int players_num = 5;
+	Role roles[] = {VILLAGER, VILLAGER, VILLAGER, VILLAGER, WEREWOLF};
 
-	//各プレイヤーの名前を入力してもらう+プレイヤーに役職を教える
+	//乱数のシード値を設定
+	srand((unsigned int)(time(NULL)));
+
 	for (int i=0;i<players_num;i++){
 		players[i].role = roles[i]; //就職
-		sprintf(players[i].name, "hoge");  //名前は適当に
 		players[i].is_live = 1; //生きてることにする
 	}
 
-	for(;;){
-		//昼のターン
-		show_players(players, players_num);
-		printf("話し合ってください\n");
-		wait_key();//入力をまつ
-		//処刑したい人を選んでもらう
+	//名前の入力と役職提示
+	for (int i=0;i<players_num;i++) {
+		printf("Player No.%d あなたの名前は?\n", i);
+		read_line(players[i].name, sizeof(players[i].name)); 
+		printf("%s さん，貴方は %s です\n", players[i].name, ROLE_STRINGS[players[i].role]);
+		wait_key();
 		clear();
-		int ballot_box[PLAYERS_MAX_NUM];//投票箱
-		for(int i=0;i<players_num;i++)ballot_box[i] = 0;
-		for(int i=0;i<players_num;i++){
-			if(!players[i].is_live)continue;//死人は飛ばす
-			show_players(players, players_num);
-			printf("No.%d %sさんですね? 投票したい人の番号を入力してください\n", i, players[i].name);
-			int n = read_living_other_than_myself_player_num(players, players_num, i);
-			ballot_box[n]++;
-			clear();
-		}
-		//誰かが火あぶりにされる
-		int dead = ballot_winner(ballot_box, players_num);
-		players[dead].is_live = 0;//死んだことにする
-		printf("No.%d %s さんを処刑しました\n", dead, players[dead].name);
+	}
 
+	int players_ld[PLAYERS_MAX_NUM];//各ターンの前の生死の状態を記録しておく
+	for(;;){
+		for (int i=0;i<players_num;i++) players_ld[i] = players[i].is_live;//現状の生死の状態を記録
+		//昼のターン
+		daytime(players, players_num);
+		print_cadavers(players_ld, players, players_num);//死んだ人を表示
 		//		終了判定 (人狼の数が村人の人数以上なら人狼の，村人しかいないなら村人の勝利)
 		switch(win_side(players, players_num)){
 			case VILLAGER_SIDE: goto VILLAGER_WIN;
 			case WEREWOLF_SIDE: goto WEREWOLF_WIN;
 		}
+
+		//現状の生死の状態を記録
+		for (int i=0;i<players_num;i++) players_ld[i] = players[i].is_live;
 		//夜のターン
-		printf("日が沈み，恐ろしい夜が訪れました\n");
-		wait_key();
-		clear();
-
-		int ballot_box_werewolf[PLAYERS_MAX_NUM];//人狼が複数居る時にターゲットを投票する
-		for(int i=0;i<players_num;i++)ballot_box_werewolf[i] = 0;
-
-		for(int i=0;i<players_num;i++){
-			if (!players[i].is_live) continue;//死人は飛ばす
-			printf("貴方はNo.%d, %s さんですね?\n", i, players[i].name);
-			wait_key();
-			switch(players[i].role){//各プレイヤーの役職に応じて行動してもらう．
-				case VILLAGER://村人だけ異常に早いの嫌だから長岡高専名物数理演習!!をやってもらう
-					mathematical_exercises();
-					break;
-				case WEREWOLF://殺しの対象を投票
-					show_players(players, players_num);
-					printf("今夜の獲物は?\n");
-					int n = read_living_other_than_myself_player_num(players, players_num, i);
-					ballot_box_werewolf[n]++;
-					break;
-			}
-			clear();
-		}
-		//各プレイヤーの状態を決める
-		int werewolf_target = ballot_winner(ballot_box_werewolf, players_num);
-		players[werewolf_target].is_live = 0;//死んだことにする
-
-		show_players(players, players_num);
-		wait_key();
+		midnight(players, players_num);
+		print_cadavers(players_ld, players, players_num);//死んだ人を表示
 		//		終了判定 (人狼の数が村人の人数以上なら人狼の，村人しかいないなら村人の勝利)
 		switch(win_side(players, players_num)){
 			case VILLAGER_SIDE: goto VILLAGER_WIN;
