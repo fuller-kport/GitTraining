@@ -154,7 +154,7 @@ midnight(players, players_num);
 print_cadavers(players_ld, players, players_num);//死んだ人を表示
 ```
 
-そして各ターンの前後の違いから，その間に死んた人を表示する関数はこうだ．
+そして各ターンの前後の違いから，その間に死んだ人を表示する関数はこうだ．
 ```
 void print_cadavers(int before[], Player after[], int players_num){
 	int count=0;
