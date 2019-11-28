@@ -192,15 +192,72 @@ A君はホストに変更内容を取り込んでもらう方針で編集する�
 A君はこのプロジェクトの主人ではないから，
 主人に一度チェックしてから変更を取り込んでもらう方がいいと考えたんだね．
 
-そのためにA君用のローカルリポジトリに移動し作業を進めよう．
-`finish`から新しいブランチ`add_print_on_night`を生やしてそこに移動することも忘れずに．
+そのためにA君用のローカルリポジトリに移動し，
+`finish`から新しいブランチ`add_print_on_night`を生やしてそこで作業を始めよう．
 
-### 各役職の人数を入力してもらう．
+### 各役職の人数を入力してもらう
+これがその関数だ，入力した番号に応じて各役職の数を増減させる．
+```
+#define ROLES_NUM 2 
+
+int read_roles(Role roles[]){
+	int n;
+	int each_num[ROLES_NUM];
+	for (int i=0;i<ROLES_NUM;i++) each_num[i] = 0;
+
+	for (int count = 0;count<PLAYERS_MAX_NUM;count++) {
+		printf("人数は最大 合計%d 人です\n", PLAYERS_MAX_NUM);
+		printf("現在の人数はそれぞれ以下の通りです\n");
+		for (int j=0;j<ROLES_NUM;j++) {
+			printf("%s: \tNo.%d \t%d人\n", ROLE_STRINGS[j], j+1, each_num[j]);
+		}
+		printf("決定: \tNo.0\n");
+		printf("追加する役職番号を入力してください\n");
+		for (;;) {
+			printf("No.");
+			scanf("%d", &n);
+			each_num[--n]++;
+			if (-1<=n && n<ROLES_NUM) break;
+		}
+		if (n == -1) return count;
+		roles[count] = n;
+		clear();
+	}
+}
+```
+
+上の関数が返す役職の配列は入力された順になっているので，役職がバレてしまう．
+そこで役職の並びをシャッフルし，ランダムに並べ替える．
+```
+void shuffle(Role roles[], int size)
+{
+	int i = size;
+	while (i > 1) {
+		int j = rand() % i;
+		i--;
+		int tmp = roles[i];
+		roles[i] = roles[j];
+		roles[j] = tmp;
+	}
+}
+```
+
+これらの関数を使って役職を入力出来るようにしたものが
+[こちら!](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step7/A)
+
 ### 表示関数から役職を消す(これはついで)
+これはマジでついで…分かるっしょ~~わざわざタイトルにした理由がわからない~~
+
+終わったらコミットを忘れずに!
+
+A君の変更も`origin`(リモートリポジトリ)に反映させよう…
+こちらも`git push origin [ブランチ名]`でOKだ．
+この場合`git push origin add_print_on_night`っすね!
 
 ## 合体!
 ### プルリクエストを送る
-
+君とA君はどちらも
+### コンフリクトォ!!
 
 
 
