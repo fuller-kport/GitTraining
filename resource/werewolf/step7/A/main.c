@@ -34,7 +34,7 @@ void show_players(Player p[], int p_num){
 	printf("\n");
 	printf("~~~~~~~~~~~~~~~~~~~~~~~ << players! >> ~~~~~~~~~~~~~~~~~~~~~~~\n");
 	for(int i=0;i<p_num;i++){
-//		if (p[i].is_live) printf("No.%d\t name: %s role:%s\n", i, p[i].name, ROLE_STRINGS[p[i].role]);
+		//		if (p[i].is_live) printf("No.%d\t name: %s role:%s\n", i, p[i].name, ROLE_STRINGS[p[i].role]);
 		if (p[i].is_live) printf("No.%d\t name: %s\n", i, p[i].name);
 	}
 	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
@@ -137,22 +137,31 @@ int read_roles(Role roles[]){
 	int each_num[ROLES_NUM];
 	for (int i=0;i<ROLES_NUM;i++) each_num[i] = 0;
 
-	for (int count = 0;count<PLAYERS_MAX_NUM;count++) {
-		printf("人数は最大 合計%d 人です\n", PLAYERS_MAX_NUM);
-		printf("現在の人数はそれぞれ以下の通りです\n");
+	for (int count=0;;) {
+		printf ("人数は最大合計%d人です\n", PLAYERS_MAX_NUM);
+		printf("現在の各役職の人数はそれぞれ以下の通りです\n");
 		for (int j=0;j<ROLES_NUM;j++) {
 			printf("%s: \tNo.%d \t%d人\n", ROLE_STRINGS[j], j+1, each_num[j]);
 		}
 		printf("決定: \tNo.0\n");
-		printf("追加する役職番号を入力してください\n");
+		printf("追加する役職番号を入力してください(負号付きで減少)\n");
 		for (;;) {
 			printf("No.");
 			scanf("%d", &n);
-			each_num[--n]++;
-			if (-1<=n && n<ROLES_NUM) break;
+			if (-ROLES_NUM<=n && n<=ROLES_NUM) break;
 		}
-		if (n == -1) return count;
-		roles[count] = n;
+		if (n == 0) { 
+			if (count < PLAYERS_MAX_NUM) return count;
+		}else if (n < 0) {
+			if (each_num[++n] > 0) {
+				each_num[n]--;
+				count--;
+			}
+		}else{
+			roles[count] = --n;
+			each_num[n]++;
+			count++;
+		}
 		clear();
 	}
 }
@@ -177,7 +186,7 @@ int main(void){
 	//		各役職の人数を入力してもらう
 	int players_num = read_roles(roles);
 	shuffle(roles, players_num);
-	
+
 	//		各プレイヤーの名前を入力してもらう+プレイヤーに役職を教える
 	for (int i=0;i<players_num;i++){
 		players[i].role = roles[i]; //就職

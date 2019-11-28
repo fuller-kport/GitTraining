@@ -193,10 +193,10 @@ A君はこのプロジェクトの主人ではないから，
 主人に一度チェックしてから変更を取り込んでもらう方がいいと考えたんだね．
 
 そのためにA君用のローカルリポジトリに移動し，
-`finish`から新しいブランチ`add_print_on_night`を生やしてそこで作業を始めよう．
+`finish`から新しいブランチ`add_read_roles`を生やしてそこで作業を始めよう．
 
 ### 各役職の人数を入力してもらう
-これがその関数だ，入力した番号に応じて各役職の数を増減させる．
+これがその関数だ，入力した番号に応じて各役職を順に配列に入れていく．
 ```
 #define ROLES_NUM 2 
 
@@ -205,22 +205,31 @@ int read_roles(Role roles[]){
 	int each_num[ROLES_NUM];
 	for (int i=0;i<ROLES_NUM;i++) each_num[i] = 0;
 
-	for (int count = 0;count<PLAYERS_MAX_NUM;count++) {
-		printf("人数は最大 合計%d 人です\n", PLAYERS_MAX_NUM);
-		printf("現在の人数はそれぞれ以下の通りです\n");
+	for (int count=0;;) {
+		printf ("人数は最大合計%d人です\n", PLAYERS_MAX_NUM);
+		printf("現在の各役職の人数はそれぞれ以下の通りです\n");
 		for (int j=0;j<ROLES_NUM;j++) {
 			printf("%s: \tNo.%d \t%d人\n", ROLE_STRINGS[j], j+1, each_num[j]);
 		}
 		printf("決定: \tNo.0\n");
-		printf("追加する役職番号を入力してください\n");
+		printf("追加する役職番号を入力してください(負号付きで減少)\n");
 		for (;;) {
 			printf("No.");
 			scanf("%d", &n);
-			each_num[--n]++;
-			if (-1<=n && n<ROLES_NUM) break;
+			if (-ROLES_NUM<=n && n<=ROLES_NUM) break;
 		}
-		if (n == -1) return count;
-		roles[count] = n;
+		if (n == 0) { 
+			if (count < PLAYERS_MAX_NUM) return count;
+		}else if (n < 0) {
+			if (each_num[++n] > 0) {
+				each_num[n]--;
+				count--;
+			}
+		}else{
+			roles[count] = --n;
+			each_num[n]++;
+			count++;
+		}
 		clear();
 	}
 }
@@ -256,7 +265,14 @@ A君の変更も`origin`(リモートリポジトリ)に反映させよう…
 
 ## 合体!
 ### プルリクエストを送る
-君とA君はどちらも
+君とA君はどちらも`git push`コマンドで変更をリモートリポジトリに送った．
+
+君の送り先には`finish`ブランチが既にあった，この場合はすぐに統合…
+Gitでコミットした時の様に`finish`ブランチの履歴に追加される．
+
+ではA君の送った`add_read_roles`はどう成るだろう．
+
+
 ### コンフリクトォ!!
 
 
