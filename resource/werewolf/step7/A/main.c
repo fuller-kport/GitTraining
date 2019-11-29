@@ -4,6 +4,7 @@
 //名前の最大文字数
 #define NAME_MAX_NUM 32
 #define ROLE_STR_MAX_NUM 32
+#define ROLES_NUM 2
 #define PLAYERS_MAX_NUM 30
 
 //役職を表すRole型を定義
@@ -28,12 +29,13 @@ typedef struct{
 	int is_live;             //生きているなら1, 死んでいるなら0
 }Player;
 
-//プレイヤーの情報を表示 今は開発しやすいように役職も表示
+//プレイヤーの情報を表示
 void show_players(Player p[], int p_num){
 	printf("\n");
 	printf("~~~~~~~~~~~~~~~~~~~~~~~ << players! >> ~~~~~~~~~~~~~~~~~~~~~~~\n");
 	for(int i=0;i<p_num;i++){
-		if (p[i].is_live) printf("No.%d\t name: %s role:%s\n", i, p[i].name, ROLE_STRINGS[p[i].role]);
+		//		if (p[i].is_live) printf("No.%d\t name: %s role:%s\n", i, p[i].name, ROLE_STRINGS[p[i].role]);
+		if (p[i].is_live) printf("No.%d\t name: %s\n", i, p[i].name);
 	}
 	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 }
@@ -130,13 +132,61 @@ WinSide win_side(Player p[], int p_num){
 	return NONE;
 }
 
+int read_roles(Role roles[]){
+	int n;
+	int each_num[ROLES_NUM];
+	for (int i=0;i<ROLES_NUM;i++) each_num[i] = 0;
+
+	for (int count=0;;) {
+		printf ("人数は最大合計%d人です\n", PLAYERS_MAX_NUM);
+		printf("現在の各役職の人数はそれぞれ以下の通りです\n");
+		for (int j=0;j<ROLES_NUM;j++) {
+			printf("%s: \tNo.%d \t%d人\n", ROLE_STRINGS[j], j+1, each_num[j]);
+		}
+		printf("決定: \tNo.0\n");
+		printf("追加する役職番号を入力してください(負号付きで減少)\n");
+		for (;;) {
+			printf("No.");
+			scanf("%d", &n);
+			if (-ROLES_NUM<=n && n<=ROLES_NUM) break;
+		}
+		if (n == 0) { 
+			if (count < PLAYERS_MAX_NUM) return count;
+		}else if (n < 0) {
+			if (each_num[++n] > 0) {
+				each_num[n]--;
+				count--;
+			}
+		}else{
+			roles[count] = --n;
+			each_num[n]++;
+			count++;
+		}
+		clear();
+	}
+}
+
+void shuffle(Role roles[], int size)
+{
+	int i = size;
+	while (i > 1) {
+		int j = rand() % i;
+		i--;
+		int tmp = roles[i];
+		roles[i] = roles[j];
+		roles[j] = tmp;
+	}
+}
+
 int main(void){
-	printf("人狼");
+	clear();
 	Player players[PLAYERS_MAX_NUM];
+	Role roles[PLAYERS_MAX_NUM];
 	//	役職を割り振る
 	//		各役職の人数を入力してもらう
-	int players_num = 5;
-	Role roles[] = {VILLAGER, VILLAGER, VILLAGER, VILLAGER, WEREWOLF};
+	int players_num = read_roles(roles);
+	shuffle(roles, players_num);
+
 	//		各プレイヤーの名前を入力してもらう+プレイヤーに役職を教える
 	for (int i=0;i<players_num;i++){
 		players[i].role = roles[i]; //就職
