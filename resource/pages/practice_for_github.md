@@ -350,6 +350,6 @@ git pull origin finish
 
 最終的には[こんな感じ!!](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step7/comp)
 
-## +α 騎士を追加してよう
+# +α 騎士を追加してよう
 TODO: 気が向いたら書く
 
