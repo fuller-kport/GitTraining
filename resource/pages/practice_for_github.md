@@ -232,7 +232,7 @@ int read_roles(Role roles[]){
 			if (-ROLES_NUM<=n && n<=ROLES_NUM) break;
 		}
 		if (n == 0) { 
-			if (count < PLAYERS_MAX_NUM) return count;
+			if (count <= PLAYERS_MAX_NUM) return count;
 		}else if (n < 0) {
 			if (each_num[++n] > 0) {
 				each_num[n]--;
@@ -344,5 +344,12 @@ git pull origin finish
 「コンフリクトが無くなりマージ出来るよ!」と言う旨のボタンに変わっているはずだ．
 そこを押せば，プルリクで提案した変更が`finish`ブランチに取り込まれる．
 
+最後にリモートリポジトリの`finish`を`master`ブランチにマージしたら人狼の完成だ!!
+ローカルの`master`はまだ変更を反映していないので，
+リモートリポジトリから`git pull`を使って変更を反映しよう．
+
+最終的には[こんな感じ!!](https://github.com/fuller-kport/GitTraining/blob/master/resource/werewolf/step7/comp)
+
+### +α 騎士を追加してよう
 
 
